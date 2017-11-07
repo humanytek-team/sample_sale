@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="view_order_form_sample">
+        <field name="name">view_order_form_sample</field>
+        <field name="model">sale.order</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+          <field name="partner_shipping_id" position="after">
+            <field name="sample" attrs="{'readonly':['|',('state','in',('done','sale'))]}"/>
+          </field>
+        </field>
+      </record>
+
+
+      <record model="ir.ui.view" id="invoice_form_sample">
+        <field name="name">invoice_form_sample</field>
+        <field name="model">account.invoice</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+          <field name="payment_term_id" position="after">
+            <field name="sample" invisible='1'/>
+            </field>
+        </field>
+      </record>
+
+
+    </data>
+</openerp>
