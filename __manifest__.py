@@ -6,7 +6,7 @@
         Permite la creacion de pedidos de venta tipo muestra
     """,
     'category' : 'Sale',
-    'depends' : ['sale','sale_stock'],
+    'depends' : ['sale_stock'],
     'data': [
         'sale_view.xml',
         #'security/groups.xml',
