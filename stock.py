@@ -2,7 +2,7 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import UserError, RedirectWarning, ValidationError
 
-_COST = 0.01
+_COST = 1
 
 class StockMove(models.Model):
     _inherit = "stock.move"
@@ -43,27 +43,27 @@ class StockMove(models.Model):
     #                     x[2]['credit'] = 0.01
     #     return res
 
-    # def _prepare_account_move_line(self, qty, cost, credit_account_id, debit_account_id):
+    def _prepare_account_move_line(self, qty, cost, credit_account_id, debit_account_id):
 
-    #     res = super(StockMove,self)._prepare_account_move_line(qty, cost, credit_account_id, debit_account_id)
-    #     #print 'res: ',res
+        res = super(StockMove,self)._prepare_account_move_line(qty, cost, credit_account_id, debit_account_id)
+        #print 'res: ',res
 
-    #     if self.procurement_id and self.procurement_id.sale_line_id and self.procurement_id.sale_line_id.order_id \
-    #     and self.procurement_id.sale_line_id.order_id.sample:
-    #         #print 'is sample'
+        if self.procurement_id and self.procurement_id.sale_line_id and self.procurement_id.sale_line_id.order_id \
+        and self.procurement_id.sale_line_id.order_id.sample:
+            #print 'is sample'
            
-    #         valuation_amount = _COST
-    #         value = self.company_id.currency_id.round(valuation_amount * qty)
+            valuation_amount = _COST
+            value = self.company_id.currency_id.round(valuation_amount * qty)
 
-    #         for x in res:
-    #             if len(x) >= 3 and x[2]:
-    #                 if x[2]['debit'] != 0:
-    #                     print 'debit'
-    #                     x[2]['debit'] = value
-    #                 if x[2]['credit'] != 0:
-    #                     print 'credit'
-    #                     x[2]['credit'] = value
-    #     return res
+            for x in res:
+                if len(x) >= 3 and x[2]:
+                    if x[2]['debit'] != 0:
+                        print 'debit'
+                        x[2]['debit'] = value
+                    if x[2]['credit'] != 0:
+                        print 'credit'
+                        x[2]['credit'] = value
+        return res
 
     # def _prepare_account_move_line(self, qty, cost, credit_account_id, debit_account_id):
     #     """

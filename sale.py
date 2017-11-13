@@ -2,7 +2,7 @@
 from openerp import models, fields, api, _
 from openerp.exceptions import UserError, RedirectWarning, ValidationError
 
-_COST = 0.01
+_COST = 1
 
 
 class SaleOrder(models.Model):
